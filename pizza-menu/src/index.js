@@ -71,10 +71,20 @@ function Header() {
 }
 
 function Menu() {
+	const pizzas = pizzaData;
+	const numPizzas = pizzas.length;
+	// const numPizzas = 0;
 	return (
 		<main className="menu">
 			<h2>Our Menu</h2>
-			<Pizza
+			{numPizzas > 0 ? (
+				<ul className="pizzas">
+					{pizzaData.map((pizza) => (
+						<Pizza pizzaObj={pizza} key={pizza.name} />
+					))}
+				</ul>
+			) : null}
+			{/* <Pizza
 				name="Pizza Spinaci"
 				ingredients="Tomato, spinach, cheese"
 				photoName="pizzas/spinaci.jpg"
@@ -85,32 +95,52 @@ function Menu() {
 				ingredients="Stuffs"
 				photoName="pizzas/funghi.jpg"
 				price={23}
-			/>
+			/> */}
 		</main>
 	);
 }
 function Pizza(props) {
-	console.log(props);
+	// console.log(props);
 	return (
 		<div>
-			<img src={props.photoName} alt={props.name}></img>
-			<h3>{props.name}</h3>
-			<p>{props.ingredients}</p>
-			<span>{props.price}</span>
+			<img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}></img>
+			<h3>{props.pizzaObj.name}</h3>
+			<p>{props.pizzaObj.ingredients}</p>
+			<span>{props.pizzaObj.price}</span>
 		</div>
 	);
 }
 
 function Footer() {
-	const date = new Date().toLocaleTimeString();
+	// const date = new Date().tolocaletimestring();
 	const hour = new Date().getHours();
-	const openHour = 8;
-	const closeHour = 22;
-	const isOpen = hour >= openHour && hour <= closeHour;
-	console.log(isOpen);
+	const openhour = 9;
+	const closehour = 22;
+	const isopen = hour >= openhour && hour <= closehour;
+	console.log(isopen);
 
-	// return React.createElement("footer", null, "We're currently open!");
-	return <footer>{date} We're currently open!</footer>;
+	// return react.createelement("footer", null, "we're currently open!");
+	// return <footer>{date} we're currently open!</footer>;
+	return (
+		<footer classname="footer">
+			{isopen ? (
+				<Order closehour={closehour} />
+			) : (
+				<p>
+					we're happy to welcome you betwen {openhour}:00 and{" "}
+					{closehour}:00
+				</p>
+			)}
+		</footer>
+	);
+}
+function Order(props) {
+	return (
+		<div>
+			<p>we're open untill {props.closehour}:00. come visit us</p>
+			<button className="btn">Order</button>
+		</div>
+	);
 }
 
 // React 18
