@@ -78,11 +78,14 @@ function Menu() {
 		<main className="menu">
 			<h2>Our Menu</h2>
 			{numPizzas > 0 ? (
-				<ul className="pizzas">
-					{pizzaData.map((pizza) => (
-						<Pizza pizzaObj={pizza} key={pizza.name} />
-					))}
-				</ul>
+				<>
+					<p>A quick brown fox jumped over the lazy dogs</p>
+					<ul className="pizzas">
+						{pizzaData.map((pizza) => (
+							<Pizza pizzaObj={pizza} key={pizza.name} />
+						))}
+					</ul>
+				</>
 			) : null}
 			{/* <Pizza
 				name="Pizza Spinaci"
@@ -135,6 +138,7 @@ function Footer() {
 	);
 }
 function Order(props) {
+	console.log();
 	return (
 		<div>
 			<p>we're open untill {props.closehour}:00. come visit us</p>
